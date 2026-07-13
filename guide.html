@@ -39,7 +39,8 @@
       border-radius: 0 12px 12px 0; padding: 16px 20px; margin: 18px 0; font-size: 0.93rem; color: var(--bone);
     }
     .callout.warn { border-color: #ffb02e; background: rgba(255,176,46,0.08); }
-    .url-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+    .table-scroll { overflow-x: auto; margin: 16px 0; }
+    .url-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.9rem; }
     .url-table th, .url-table td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); color: var(--muted); }
     .url-table th { color: var(--bone); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
     .url-table td:first-child { white-space: nowrap; }
@@ -102,7 +103,7 @@ Selar checkout (your payment page)
 <b>/classroom</b> ← reads <b>data/course-content.json</b>
              (which /admin generates)
     </pre></div>
-    <table class="url-table">
+    <div class="table-scroll"><table class="url-table">
       <tr><th>URL</th><th>Who it's for</th><th>Linked publicly?</th></tr>
       <tr><td><a href="/">/</a></td><td>Everyone — the main landing hub</td><td>Yes</td></tr>
       <tr><td><a href="/sensei">/sensei</a></td><td>Everyone — the AI-video showpiece</td><td>Yes (in every nav)</td></tr>
@@ -112,7 +113,7 @@ Selar checkout (your payment page)
       <tr><td><a href="/classroom">/classroom</a></td><td>Paying students — watch lessons</td><td><b>No</b> — you share it after payment</td></tr>
       <tr><td><a href="/admin">/admin</a></td><td>You only — manage lesson videos</td><td><b>No</b> — keep private</td></tr>
       <tr><td><a href="/guide">/guide</a></td><td>You only — this manual</td><td><b>No</b></td></tr>
-    </table>
+    </table></div>
     <div class="callout warn">⚠️ <b>Never open the .html files by double-clicking them</b> — they'll look broken (plain text, no styling) because styles and data only load through a web server. Always use the live URLs above, on <code>https://ai-income-academy.vercel.app</code>.</div>
 
     <!-- 2 ─────────────────────────────── -->
