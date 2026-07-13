@@ -26,7 +26,9 @@ never displayed directly.
 Upload lesson videos to YouTube as **Unlisted** (not Private — private can't embed),
 then open `/admin`: paste each video's URL per lesson, export `course-content.json`,
 replace `data/course-content.json`, commit and redeploy. `/classroom` renders the
-result. The full step-by-step guide lives on the `/admin` page itself.
+result. The full step-by-step guide lives on the `/admin` page itself, and the complete
+owner's manual (how every page connects, payments, deploys, troubleshooting)
+is at `/guide` — both unlisted.
 
 ## TODO before launch
 

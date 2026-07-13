@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Owner's Manual — AI Income Academy</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>" />
+  <style>
+    .manual { max-width: 900px; margin: 0 auto; padding: 130px 24px 90px; }
+    .manual h2 { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(1.5rem, 3vw, 2.2rem); margin: 70px 0 18px; scroll-margin-top: 100px; }
+    .manual h3 { font-size: 1.06rem; margin: 30px 0 10px; color: var(--bone); }
+    .manual p, .manual li { color: var(--muted); font-size: 0.97rem; line-height: 1.7; }
+    .manual ul, .manual ol { margin: 12px 0 12px 22px; display: flex; flex-direction: column; gap: 8px; }
+    .manual code {
+      background: var(--ink-3); border: 1px solid var(--line); border-radius: 6px;
+      padding: 2px 8px; font-size: 0.85em; color: var(--accent); word-break: break-all;
+    }
+    .manual a { color: var(--accent); }
+    .toc {
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2);
+      padding: 26px 30px; margin-top: 34px;
+    }
+    .toc ol { margin: 10px 0 0 20px; }
+    .toc a { color: var(--muted); } .toc a:hover { color: var(--accent); }
+    .sitemap {
+      background: var(--ink-2); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px; margin: 20px 0; overflow-x: auto;
+    }
+    .sitemap pre { font-family: ui-monospace, Consolas, monospace; font-size: 0.82rem; line-height: 1.75; color: var(--muted); }
+    .sitemap pre b { color: var(--accent); font-weight: 400; }
+    .callout {
+      border-left: 3px solid var(--accent); background: var(--accent-soft);
+      border-radius: 0 12px 12px 0; padding: 16px 20px; margin: 18px 0; font-size: 0.93rem; color: var(--bone);
+    }
+    .callout.warn { border-color: #ffb02e; background: rgba(255,176,46,0.08); }
+    .url-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+    .url-table th, .url-table td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .url-table th { color: var(--bone); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
+    .url-table td:first-child { white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="/">AI<b>INCOME</b>ACADEMY</a>
+    <div class="nav-links">
+      <a href="/sensei">The Sensei</a>
+      <a href="/classroom">Classroom</a>
+      <a href="/admin">Admin</a>
+      <a href="/guide" class="active">Manual</a>
+    </div>
+  </nav>
+
+  <div class="manual">
+    <span class="kicker">For your eyes only · Not linked from public pages</span>
+    <h1 class="display h-1">Owner's Manual</h1>
+    <p class="lead" style="margin-top:16px">Everything you need to run this site: what each page does, how they connect, how to publish lessons, take payments and ship updates.</p>
+
+    <div class="toc">
+      <b>Contents</b>
+      <ol>
+        <li><a href="#map">The site map — how everything connects</a></li>
+        <li><a href="#public">The public pages (your marketing)</a></li>
+        <li><a href="#admin">The admin dashboard</a></li>
+        <li><a href="#classroom">The student classroom</a></li>
+        <li><a href="#publish">Publishing lessons — YouTube → live</a></li>
+        <li><a href="#payments">Payments &amp; giving students access</a></li>
+        <li><a href="#updates">Making changes &amp; redeploying</a></li>
+        <li><a href="#assets">The AI assets — how they were made</a></li>
+        <li><a href="#troubleshoot">Troubleshooting</a></li>
+      </ol>
+    </div>
+
+    <!-- 1 ─────────────────────────────── -->
+    <h2 id="map">1. The site map</h2>
+    <div class="sitemap"><pre>
+YOUR AUDIENCE                          YOU (owner)
+─────────────                          ───────────
+TikTok / FB ads & posts
+      │
+      ▼
+<b>/</b> (hub) ◄──────────────┐             <b>/admin</b>  ← paste YouTube IDs, export JSON
+ │  │  │                │             <b>/guide</b>  ← this manual
+ │  │  │            <b>/sensei</b>
+ │  │  │        (cinematic showpiece,
+ │  │  │         funnels to courses)
+ ▼  ▼  ▼
+<b>/courses/ai-ads</b>      each course page
+<b>/courses/ai-agents</b>   cross-links the
+<b>/courses/ai-websites</b> other two
+      │
+      ▼  "Enroll" button
+Selar checkout (your payment page)
+      │
+      ▼  after payment: you send them the link
+<b>/classroom</b> ← reads <b>data/course-content.json</b>
+             (which /admin generates)
+    </pre></div>
+    <table class="url-table">
+      <tr><th>URL</th><th>Who it's for</th><th>Linked publicly?</th></tr>
+      <tr><td><a href="/">/</a></td><td>Everyone — the main landing hub</td><td>Yes</td></tr>
+      <tr><td><a href="/sensei">/sensei</a></td><td>Everyone — the AI-video showpiece</td><td>Yes (in every nav)</td></tr>
+      <tr><td><a href="/courses/ai-ads">/courses/ai-ads</a> ·
+              <a href="/courses/ai-agents">ai-agents</a> ·
+              <a href="/courses/ai-websites">ai-websites</a></td><td>Buyers — one landing page per course</td><td>Yes</td></tr>
+      <tr><td><a href="/classroom">/classroom</a></td><td>Paying students — watch lessons</td><td><b>No</b> — you share it after payment</td></tr>
+      <tr><td><a href="/admin">/admin</a></td><td>You only — manage lesson videos</td><td><b>No</b> — keep private</td></tr>
+      <tr><td><a href="/guide">/guide</a></td><td>You only — this manual</td><td><b>No</b></td></tr>
+    </table>
+    <div class="callout warn">⚠️ <b>Never open the .html files by double-clicking them</b> — they'll look broken (plain text, no styling) because styles and data only load through a web server. Always use the live URLs above, on <code>https://ai-income-academy.vercel.app</code>.</div>
+
+    <!-- 2 ─────────────────────────────── -->
+    <h2 id="public">2. The public pages</h2>
+    <h3>/ — the hub</h3>
+    <p>Your main landing page: hero, the three course cards, proof wall (recruiter DMs + student results), your instructor bio, sample daily job drops, audience hooks for each demographic (students, graduates, mothers, fathers), the upsell library and FAQ. This is where ads and social posts should point.</p>
+    <h3>/sensei — the showpiece</h3>
+    <p>The cinematic scroll experience: scrolling rotates an AI-generated 360° orbit of you, then two more pinned video chapters present your offers and receipts. Use it as flex material — link it in your TikTok bio, drop it in DMs, show it on live. It doubles as proof that the skills you teach are real ("this page was made with the course's own tools").</p>
+    <h3>/courses/* — the three sales pages</h3>
+    <p>One per course, each with its own accent color, full curriculum accordion (lessons badge-marked Free preview / Standard / Premium), proof, pricing (Standard $49 / Premium $99 — placeholders you can change), FAQ and cross-links to the other courses. The <b>Enroll buttons currently point to a placeholder</b> <code>https://selar.co/</code> — see section 6.</p>
+
+    <!-- 3 ─────────────────────────────── -->
+    <h2 id="admin">3. The admin dashboard (/admin)</h2>
+    <p>Your control room for course content. Open <a href="/admin">/admin</a> and you'll see:</p>
+    <ul>
+      <li><b>The publishing guide</b> — 7 steps from recorded video to live lesson (same flow as section 5 below).</li>
+      <li><b>The lesson editor</b> — three tabs (one per course). Every module and lesson from your landing pages is pre-loaded. For each lesson:
+        <ul>
+          <li>Paste the YouTube <b>URL or ID</b> — the field turns <b>green</b> when a valid ID is captured (it auto-extracts the ID from any YouTube URL format).</li>
+          <li>Set the <b>tier</b>: Free preview, Standard, or Premium.</li>
+          <li>Hit <b>▶</b> to preview the actual embed in a popup, so you know the video plays before publishing.</li>
+        </ul>
+      </li>
+      <li><b>Autosave</b> — every keystroke saves a draft to your browser. Close the tab, come back next week, your work is still there (on the same browser/computer).</li>
+      <li><b>Download course-content.json</b> — exports the finished file. This is the "publish" artifact — see section 5 for what to do with it.</li>
+      <li><b>Reset to published file</b> — throws away your local draft and reloads whatever is currently live.</li>
+    </ul>
+    <div class="callout warn">⚠️ The admin page is hidden (not linked anywhere public, blocked from search engines) but it is <b>not password-protected</b> — it can't change the live site by itself (only you can, by deploying), but don't share the URL.</div>
+
+    <!-- 4 ─────────────────────────────── -->
+    <h2 id="classroom">4. The student classroom (/classroom)</h2>
+    <p>Where students actually watch. It reads <code>data/course-content.json</code> (the file your admin dashboard generates) and renders:</p>
+    <ul>
+      <li>A tab per course, in that course's accent color.</li>
+      <li>Every module as a collapsible section showing how many lessons are live (e.g. "3/6 live").</li>
+      <li>Lessons with a video show <b>▶</b> and play in the big player (embedded YouTube, no-cookie player, minimal branding). Lessons without a video yet show 🔒 and a "coming soon" message.</li>
+      <li>Tier badges (free / standard / premium) on every lesson so students see what their plan includes.</li>
+    </ul>
+    <p><b>How students get here:</b> you send them the link after they pay on Selar (section 6). The page isn't linked from any public page and is blocked from search engines.</p>
+
+    <!-- 5 ─────────────────────────────── -->
+    <h2 id="publish">5. Publishing lessons — YouTube → live</h2>
+    <ol>
+      <li>Record and edit a lesson video.</li>
+      <li>Upload to YouTube as <b>Unlisted</b> with <b>Allow embedding ON</b>.
+        <div class="callout warn" style="margin-top:10px">⚠️ Not <b>Private</b> — private videos refuse to play when embedded, students would see an error. <b>Unlisted</b> = invisible on YouTube (no search, no channel page, no recommendations) but plays anywhere you place the link. This is the correct setting for course videos.</div>
+      </li>
+      <li>Copy the video link (e.g. <code>https://youtu.be/AbCdEfGhIjK</code>).</li>
+      <li>Open <a href="/admin">/admin</a> → pick the course tab → paste the link into that lesson's field (turns green) → set tier → optionally preview with ▶.</li>
+      <li>Click <b>Download course-content.json</b>.</li>
+      <li>In the site folder on your computer (<code>AI course/ai-income-academy</code>), replace <code>data/course-content.json</code> with the downloaded file.</li>
+      <li>Deploy (section 7). Done — <a href="/classroom">/classroom</a> now plays the new lessons.</li>
+    </ol>
+
+    <!-- 6 ─────────────────────────────── -->
+    <h2 id="payments">6. Payments &amp; giving students access</h2>
+    <ol>
+      <li><b>Create your products on Selar</b> — one product per course (or per tier, e.g. "AI Ads — Premium"). Selar handles cards, bank transfer and local payment methods, and pays you out.</li>
+      <li><b>Replace the placeholder checkout links.</b> Each course page has two enroll buttons pointing to <code>https://selar.co/</code>. Open <code>courses/ai-ads.html</code>, <code>courses/ai-agents.html</code>, <code>courses/ai-websites.html</code>, search for <code>TODO</code>, and paste your real Selar product URLs. Deploy.</li>
+      <li><b>Deliver access after payment.</b> In Selar, set the product's "content" / thank-you message to include the classroom link: <code>https://ai-income-academy.vercel.app/classroom</code> plus a welcome note. Selar shows it to buyers automatically after successful payment.</li>
+      <li><b>Know the current limitation:</b> this site is static — the classroom link is secret, but anyone who has it can open it. That's a normal, acceptable launch setup (same as sharing unlisted YouTube links). When revenue justifies it, upgrade to real accounts:
+        <ul>
+          <li><b>Easiest:</b> deliver videos through Selar's own course-hosting and keep this site purely as marketing.</li>
+          <li><b>Add-on auth:</b> Memberstack or Outseta — paste-in login/paywall for static sites.</li>
+          <li><b>Full custom:</b> a proper backend (Supabase/Firebase) — ask me when you're ready and I'll build it.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <!-- 7 ─────────────────────────────── -->
+    <h2 id="updates">7. Making changes &amp; redeploying</h2>
+    <p>The site lives in three places that stay in sync:</p>
+    <ul>
+      <li><b>Your computer:</b> <code>C:\Users\ADMIN\Documents\Codex\Stan_chuks\AI course\ai-income-academy</code> — where edits happen.</li>
+      <li><b>GitHub:</b> <code>github.com/X-techlord/ai-income-academy</code> — the backup / source of truth.</li>
+      <li><b>Vercel:</b> <code>ai-income-academy.vercel.app</code> — the live site (project under the chimastanleychuks account).</li>
+    </ul>
+    <p>To ship any change (new lesson JSON, new price, new Selar link), open a terminal in the site folder and run:</p>
+    <ul>
+      <li><code>git add -A</code></li>
+      <li><code>git commit -m "describe the change"</code></li>
+      <li><code>git push</code></li>
+      <li><code>vercel deploy --prod</code></li>
+    </ul>
+    <p>Or just tell Claude Code what to change — it can edit, commit, push and deploy in one go. <b>Optional upgrade:</b> in the Vercel dashboard, connect the GitHub repo to the project once ("Git" settings) and every <code>git push</code> will auto-deploy — no more manual deploy step.</p>
+
+    <!-- 8 ─────────────────────────────── -->
+    <h2 id="assets">8. The AI assets — how they were made</h2>
+    <p>Every visual was generated through the <b>Arcads.ai API</b> (scripts live in your <code>AIS-OS/scripts/arcads/</code> folder):</p>
+    <ul>
+      <li><b>Hero images</b> (hub + 3 course pages): GPT Image 2, 16:9.</li>
+      <li><b>Sensei videos</b> (orbit / builder / closer): Seedance 2.0, 8s, 1080p, audio off — compressed to under 1 MB each for fast loading, orbit encoded with dense keyframes so scrubbing is smooth.</li>
+      <li><b>Instructor portrait</b> (hub bio): GPT Image 2, 3:4.</li>
+      <li><b>Identity consistency:</b> your character sheet (<code>AI course/AI course Assets/Tutor-character-sheet.png</code>) is uploaded as a <b>reference image</b> on every generation — it is never displayed on the site itself, exactly so the face stays consistent across all images and videos.</li>
+    </ul>
+    <p>To generate new assets the same way, ask Claude Code — e.g. "generate a new Sensei clip of [scene] with the character sheet as reference and add it to the sensei page." Generation prompts never include your name or company names.</p>
+
+    <!-- 9 ─────────────────────────────── -->
+    <h2 id="troubleshoot">9. Troubleshooting</h2>
+    <h3>A page looks like plain black-on-white text with blue links</h3>
+    <p>You opened the .html file directly from the folder. Use the live URL instead — styling, fonts, videos and course data only load through the server.</p>
+    <h3>A lesson shows "coming soon" but I added the video</h3>
+    <p>Adding it in /admin only saves a <b>draft in your browser</b>. You must export the JSON, replace <code>data/course-content.json</code> in the folder, and deploy (sections 5–7).</p>
+    <h3>A video won't play in the classroom ("Video unavailable")</h3>
+    <p>The YouTube video is either <b>Private</b> (change to Unlisted) or has <b>embedding disabled</b> (YouTube Studio → that video → Details → show more → License and distribution → tick "Allow embedding").</p>
+    <h3>I lost my admin draft</h3>
+    <p>Drafts live in the browser you used. Use the same computer/browser, or re-import by opening /admin — it always starts from the live published file if no draft exists.</p>
+    <h3>The orbit doesn't scrub on my phone</h3>
+    <p>It needs one touch on the page first (a browser autoplay rule) — after the first tap, scrolling scrubs normally. This is already handled in the code.</p>
+    <h3>I want to change prices, copy, or add a course</h3>
+    <p>Prices and copy are plain text in the HTML files — edit and deploy, or ask Claude Code. A new course needs: a landing page in <code>courses/</code>, a card on the hub, and an entry in <code>data/course-content.json</code> — a 15-minute job for Claude Code.</p>
+  </div>
+
+</body>
+</html>
