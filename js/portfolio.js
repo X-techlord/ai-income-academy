@@ -20,6 +20,7 @@ if (heroTrack && orbit) {
   let ready = false;
 
   orbit.addEventListener("loadedmetadata", () => { ready = true; });
+  if (orbit.readyState >= 1) ready = true; // metadata may load before the listener attaches
   // iOS/Safari: a muted play()+pause() unlocks programmatic seeking
   const unlock = () => {
     orbit.play().then(() => orbit.pause()).catch(() => {});
