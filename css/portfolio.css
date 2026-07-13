@@ -1,0 +1,237 @@
+/* ============================================================
+   THE SENSEI EXPERIENCE — scroll-scrubbed cinematic portfolio
+   ============================================================ */
+
+/* ---------- scrub hero ---------- */
+.scrub-track { position: relative; height: 420vh; }
+.scrub-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+.scrub-stage video,
+.scrub-stage .stage-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.scrub-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(65% 60% at 50% 40%, transparent 40%, rgba(6, 8, 7, 0.55) 100%),
+    linear-gradient(180deg, rgba(6,8,7,0.5), transparent 30%, transparent 70%, rgba(6,8,7,0.9));
+}
+
+.stage-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 9vh;
+}
+
+/* giant letter-by-letter name */
+.mega-name {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.88;
+  font-size: clamp(3.4rem, 13vw, 12rem);
+  letter-spacing: 0.01em;
+  display: block;
+}
+.mega-name .ln { display: block; overflow: hidden; }
+.mega-name .ch {
+  display: inline-block;
+  transform: translateY(115%) rotate(4deg);
+  animation: chIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(0.35s + var(--i) * 0.045s);
+}
+@keyframes chIn { to { transform: translateY(0) rotate(0); } }
+html:not(.js) .mega-name .ch { transform: none; animation: none; }
+
+.stage-sub {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+}
+.stage-sub .lead { max-width: 560px; }
+
+/* orbit HUD */
+.hud {
+  position: absolute;
+  top: 96px;
+  right: 28px;
+  text-align: right;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 2;
+}
+.hud b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.hud .hud-bar {
+  width: 140px;
+  height: 2px;
+  background: var(--line);
+  margin: 10px 0 0 auto;
+  overflow: hidden;
+}
+.hud .hud-bar i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+}
+
+/* scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  translate: -50% 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+.scroll-cue::after {
+  content: "";
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(var(--accent), transparent);
+  animation: cueDrop 1.8s ease-in-out infinite;
+}
+@keyframes cueDrop {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  60% { transform: scaleY(1); transform-origin: top; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---------- pinned video chapters (pillars / work) ---------- */
+.chapter-track { position: relative; height: 380vh; }
+.chapter-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+}
+.chapter-stage video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.chapter-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(6,8,7,0.92) 0%, rgba(6,8,7,0.65) 45%, rgba(6,8,7,0.25) 100%);
+}
+.chapter-stage.right::before {
+  background: linear-gradient(270deg, rgba(6,8,7,0.92) 0%, rgba(6,8,7,0.65) 45%, rgba(6,8,7,0.25) 100%);
+}
+
+.pillars-box { max-width: 620px; }
+.pillar {
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+  opacity: 0.12;
+  transform: translateX(-16px);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+html:not(.js) .pillar { opacity: 1; transform: none; }
+.pillar.on { opacity: 1; transform: none; }
+.pillar .p-num {
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.pillar h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+  line-height: 1;
+  margin: 10px 0 10px;
+}
+.pillar p { color: var(--muted); max-width: 480px; }
+.pillar a { color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+
+/* chapter progress dots */
+.chapter-dots {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+.chapter-stage.right .chapter-dots { right: auto; left: 28px; }
+.chapter-dots i {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--muted);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+.chapter-dots i.on { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
+
+/* ---------- work cards over video ---------- */
+.work-box { width: 100%; }
+.work-box .cards { margin-top: 40px; }
+.work-box .card { background: rgba(12, 15, 14, 0.82); backdrop-filter: blur(6px); }
+
+/* ---------- socials ---------- */
+.socials { display: flex; gap: 14px; justify-content: center; margin-top: 34px; flex-wrap: wrap; }
+.socials a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: all 0.25s;
+}
+.socials a:hover { color: var(--ink); background: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 720px) {
+  .scrub-track { height: 300vh; }
+  .chapter-track { height: 300vh; }
+  .hud { top: 84px; right: 18px; }
+  .chapter-dots { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mega-name .ch { animation-duration: 0.01s; }
+  .scroll-cue::after { animation: none; }
+}

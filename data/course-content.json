@@ -1,0 +1,214 @@
+{
+  "updated": "2026-07-13",
+  "note": "Edit this file via /admin — paste YouTube video IDs per lesson, export, replace this file, redeploy.",
+  "courses": {
+    "ai-ads": {
+      "title": "Create AI Ads for Foreign Companies",
+      "accent": "#ffb02e",
+      "modules": [
+        {
+          "title": "Script Writing",
+          "lessons": [
+            { "title": "Introduction — how great ad scripts are engineered", "tier": "free", "youtubeId": "" },
+            { "title": "Script structure: hooks, pain point, reveal, proof, CTA", "tier": "standard", "youtubeId": "" },
+            { "title": "Psychological techniques that convert", "tier": "standard", "youtubeId": "" },
+            { "title": "The UGC format", "tier": "standard", "youtubeId": "" },
+            { "title": "The interview format", "tier": "premium", "youtubeId": "" },
+            { "title": "Exercise: write 5 hooks for one product", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Prompt Writing & Voice Design",
+          "lessons": [
+            { "title": "Introduction — prompting is the new creative direction", "tier": "free", "youtubeId": "" },
+            { "title": "Prompting techniques for AI images and video", "tier": "standard", "youtubeId": "" },
+            { "title": "Iterating like a director", "tier": "standard", "youtubeId": "" },
+            { "title": "Voice design — a voice that fits the face", "tier": "premium", "youtubeId": "" },
+            { "title": "Exercise: one product, three moods", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "AI Image Generation",
+          "lessons": [
+            { "title": "Introduction — where images fit in the pipeline", "tier": "free", "youtubeId": "" },
+            { "title": "SOTA image models — GPT Image 2, Nano Banana 2", "tier": "standard", "youtubeId": "" },
+            { "title": "Your first AI image — T2I, I2I, editing", "tier": "standard", "youtubeId": "" },
+            { "title": "Character sheet design", "tier": "premium", "youtubeId": "" },
+            { "title": "Scene & environment sheets", "tier": "premium", "youtubeId": "" },
+            { "title": "Camera angles", "tier": "premium", "youtubeId": "" },
+            { "title": "Optional: storyboarding in Figma", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "AI Video Generation",
+          "lessons": [
+            { "title": "Introduction — from stills to motion", "tier": "free", "youtubeId": "" },
+            { "title": "SOTA video models — Seedance 2.0, Kling 3.0, VEO 3, Sora 2", "tier": "standard", "youtubeId": "" },
+            { "title": "Your first AI video — T2V, I2V, first/last frame, ingredients", "tier": "standard", "youtubeId": "" },
+            { "title": "Multi-shot prompting — Seedance 2.0 & Kling 3.0", "tier": "premium", "youtubeId": "" },
+            { "title": "Exercise: recreate a winning ad's shot list", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Video Editing",
+          "lessons": [
+            { "title": "Introduction to CapCut", "tier": "free", "youtubeId": "" },
+            { "title": "Assembly — trimming, sequencing, pacing", "tier": "standard", "youtubeId": "" },
+            { "title": "Captions, sound and music", "tier": "standard", "youtubeId": "" },
+            { "title": "Export settings and deliverables", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Demographics & Targeting",
+          "lessons": [
+            { "title": "Introduction — same ad, different audiences", "tier": "free", "youtubeId": "" },
+            { "title": "Building personas", "tier": "premium", "youtubeId": "" },
+            { "title": "Pain points & solutions per persona", "tier": "premium", "youtubeId": "" },
+            { "title": "Pacing per persona", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Research for Inspiration",
+          "lessons": [
+            { "title": "Introduction — research beats guessing", "tier": "free", "youtubeId": "" },
+            { "title": "Meta Ads Library", "tier": "standard", "youtubeId": "" },
+            { "title": "Google Ads Transparency Center", "tier": "standard", "youtubeId": "" },
+            { "title": "Social platform mining", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Monetizing Your AI Skills",
+          "lessons": [
+            { "title": "Introduction — from skill to income", "tier": "free", "youtubeId": "" },
+            { "title": "How to get foreign clients", "tier": "premium", "youtubeId": "" },
+            { "title": "Platforms to get clients easily", "tier": "premium", "youtubeId": "" },
+            { "title": "Profile setup that attracts recruiters", "tier": "premium", "youtubeId": "" },
+            { "title": "Negotiating pay with foreign clients", "tier": "premium", "youtubeId": "" },
+            { "title": "Getting a US bank account", "tier": "premium", "youtubeId": "" }
+          ]
+        }
+      ]
+    },
+    "ai-agents": {
+      "title": "Build AI Agents that Work While You Sleep",
+      "accent": "#a78bfa",
+      "modules": [
+        {
+          "title": "The Automation Opportunity",
+          "lessons": [
+            { "title": "Introduction — agents and automations, no jargon", "tier": "free", "youtubeId": "" },
+            { "title": "The market: what companies pay to automate", "tier": "standard", "youtubeId": "" },
+            { "title": "Your toolkit tour", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "n8n Fundamentals",
+          "lessons": [
+            { "title": "Setting up n8n", "tier": "free", "youtubeId": "" },
+            { "title": "Triggers", "tier": "standard", "youtubeId": "" },
+            { "title": "Nodes & data", "tier": "standard", "youtubeId": "" },
+            { "title": "Integrations", "tier": "standard", "youtubeId": "" },
+            { "title": "Build-along: first automation", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Building AI Agents",
+          "lessons": [
+            { "title": "Introduction — when automation needs a brain", "tier": "free", "youtubeId": "" },
+            { "title": "Working with modern AI assistants", "tier": "standard", "youtubeId": "" },
+            { "title": "Giving agents tools", "tier": "premium", "youtubeId": "" },
+            { "title": "Memory & guardrails", "tier": "premium", "youtubeId": "" },
+            { "title": "Build-along: customer-facing chat agent", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Automations Businesses Pay For",
+          "lessons": [
+            { "title": "Inbox triage & smart replies", "tier": "standard", "youtubeId": "" },
+            { "title": "Lead capture & qualification", "tier": "premium", "youtubeId": "" },
+            { "title": "Content pipelines", "tier": "premium", "youtubeId": "" },
+            { "title": "Reporting agents", "tier": "premium", "youtubeId": "" },
+            { "title": "Build-along: client-ready package", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Deploy, Monitor, Maintain",
+          "lessons": [
+            { "title": "Going live", "tier": "premium", "youtubeId": "" },
+            { "title": "Monitoring & alerts", "tier": "premium", "youtubeId": "" },
+            { "title": "Maintenance retainers", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Selling Automation in USD",
+          "lessons": [
+            { "title": "Packaging", "tier": "premium", "youtubeId": "" },
+            { "title": "Finding foreign clients", "tier": "premium", "youtubeId": "" },
+            { "title": "Pricing & negotiation", "tier": "premium", "youtubeId": "" },
+            { "title": "Getting paid — US bank account", "tier": "premium", "youtubeId": "" }
+          ]
+        }
+      ]
+    },
+    "ai-websites": {
+      "title": "Build Cool Websites Using AI",
+      "accent": "#36d6ff",
+      "modules": [
+        {
+          "title": "The AI Website Opportunity",
+          "lessons": [
+            { "title": "Introduction — who profits from cheap great websites", "tier": "free", "youtubeId": "" },
+            { "title": "The market", "tier": "standard", "youtubeId": "" },
+            { "title": "Your toolkit", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Design Taste & Inspiration",
+          "lessons": [
+            { "title": "Anatomy of an award-winning website", "tier": "free", "youtubeId": "" },
+            { "title": "Where to find inspiration", "tier": "standard", "youtubeId": "" },
+            { "title": "Color, typography and layout rules", "tier": "standard", "youtubeId": "" },
+            { "title": "Exercise: break down 3 award sites", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Building with AI",
+          "lessons": [
+            { "title": "Your first AI-built page", "tier": "free", "youtubeId": "" },
+            { "title": "The brief formula", "tier": "standard", "youtubeId": "" },
+            { "title": "Iterating like a director", "tier": "standard", "youtubeId": "" },
+            { "title": "Scroll-driven storytelling", "tier": "premium", "youtubeId": "" },
+            { "title": "Build-along: your portfolio, live", "tier": "standard", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Cinematic AI Assets",
+          "lessons": [
+            { "title": "Hero images that sell", "tier": "standard", "youtubeId": "" },
+            { "title": "AI video heroes", "tier": "premium", "youtubeId": "" },
+            { "title": "Consistency tricks", "tier": "premium", "youtubeId": "" },
+            { "title": "Compression & performance", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Launch & Handoff",
+          "lessons": [
+            { "title": "Free hosting that scales", "tier": "standard", "youtubeId": "" },
+            { "title": "Custom domains", "tier": "premium", "youtubeId": "" },
+            { "title": "Forms, bookings & basics", "tier": "premium", "youtubeId": "" },
+            { "title": "Clean handoff", "tier": "premium", "youtubeId": "" }
+          ]
+        },
+        {
+          "title": "Selling Websites",
+          "lessons": [
+            { "title": "The demo-first pitch", "tier": "premium", "youtubeId": "" },
+            { "title": "Local goldmines", "tier": "premium", "youtubeId": "" },
+            { "title": "Foreign clients", "tier": "premium", "youtubeId": "" },
+            { "title": "Getting paid — US bank account", "tier": "premium", "youtubeId": "" }
+          ]
+        }
+      ]
+    }
+  }
+}

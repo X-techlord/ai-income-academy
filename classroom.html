@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Classroom — AI Income Academy</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Watch your course lessons module by module." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+  <style>
+    .class-wrap { max-width: 1180px; margin: 0 auto; padding: 120px 24px 80px; }
+    .class-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 30px; margin-top: 34px; align-items: start; }
+    .player-box { position: sticky; top: 100px; }
+    .player {
+      aspect-ratio: 16/9; background: var(--ink-2); border: 1px solid var(--line);
+      border-radius: var(--radius); overflow: hidden; display: grid; place-items: center;
+      color: var(--muted); text-align: center; padding: 0;
+    }
+    .player iframe { width: 100%; height: 100%; border: 0; }
+    .player .empty { padding: 40px; font-size: 0.95rem; }
+    .now-playing { margin-top: 16px; }
+    .now-playing b { display: block; font-size: 1.05rem; }
+    .now-playing span { color: var(--muted); font-size: 0.85rem; }
+    .course-tabs { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+    .course-tabs button {
+      background: var(--ink-2); border: 1px solid var(--line); color: var(--muted);
+      border-radius: 999px; padding: 10px 20px; cursor: pointer; font-family: var(--font-body);
+      font-size: 0.9rem; transition: all 0.2s;
+    }
+    .course-tabs button.on { background: var(--accent); color: var(--ink); border-color: var(--accent); font-weight: 700; }
+    .syllabus { display: flex; flex-direction: column; gap: 12px; max-height: 72vh; overflow-y: auto; padding-right: 6px; }
+    .syl-module { border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); overflow: hidden; }
+    .syl-module summary {
+      list-style: none; cursor: pointer; padding: 15px 18px; font-family: var(--font-display);
+      text-transform: uppercase; font-size: 0.95rem; display: flex; justify-content: space-between; gap: 10px;
+    }
+    .syl-module summary::-webkit-details-marker { display: none; }
+    .syl-module summary small { color: var(--muted); font-family: var(--font-body); text-transform: none; }
+    .syl-lesson {
+      display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+      background: none; border: none; border-top: 1px solid var(--line); color: var(--muted);
+      padding: 12px 18px; font-family: var(--font-body); font-size: 0.88rem; cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+    }
+    .syl-lesson:hover { color: var(--bone); background: var(--ink-3); }
+    .syl-lesson.playing { color: var(--accent); }
+    .syl-lesson .ic { flex-shrink: 0; }
+    .syl-lesson .tt { flex: 1; }
+    .syl-lesson .badge {
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; white-space: nowrap;
+    }
+    .syl-lesson .badge.free { color: #7fe3a8; border-color: #7fe3a8; }
+    .syl-lesson .badge.premium { color: var(--accent); border-color: var(--accent); }
+    @media (max-width: 900px) {
+      .class-grid { grid-template-columns: 1fr; }
+      .player-box { position: static; }
+      .syllabus { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="/">AI<b>INCOME</b>ACADEMY</a>
+    <div class="nav-links">
+      <a href="/sensei">The Sensei</a>
+      <a href="/classroom" class="active">Classroom</a>
+      <a class="btn btn-primary" href="/#courses" style="padding:10px 22px">All Courses</a>
+    </div>
+  </nav>
+
+  <div class="class-wrap">
+    <span class="kicker">Student classroom</span>
+    <h1 class="display h-1">Watch. Practice. Ship.</h1>
+    <div class="course-tabs" id="courseTabs"></div>
+
+    <div class="class-grid">
+      <div class="player-box">
+        <div class="player" id="player">
+          <div class="empty">👈 Pick a lesson from the syllabus to start watching.<br /><br />
+            Lessons marked 🔒 unlock with your plan — enroll from the course pages if you haven't yet.</div>
+        </div>
+        <div class="now-playing" id="nowPlaying"></div>
+      </div>
+
+      <div class="syllabus" id="syllabus"></div>
+    </div>
+  </div>
+
+  <script>
+  (async function () {
+    const data = await fetch("/data/course-content.json").then(r => r.json());
+    const tabs = document.getElementById("courseTabs");
+    const syllabus = document.getElementById("syllabus");
+    const player = document.getElementById("player");
+    const nowPlaying = document.getElementById("nowPlaying");
+    let activeCourse = Object.keys(data.courses)[0];
+    let playingBtn = null;
+
+    function renderTabs() {
+      tabs.innerHTML = "";
+      Object.entries(data.courses).forEach(([key, c]) => {
+        const b = document.createElement("button");
+        b.textContent = c.title;
+        b.classList.toggle("on", key === activeCourse);
+        b.onclick = () => { activeCourse = key; renderTabs(); renderSyllabus(); };
+        tabs.appendChild(b);
+      });
+      document.documentElement.style.setProperty("--accent", data.courses[activeCourse].accent || "#2fe38e");
+    }
+
+    function play(les, btn, mi, li) {
+      if (!les.youtubeId) {
+        player.innerHTML = '<div class="empty">🎬 This lesson\'s video hasn\'t been published yet — check back soon.</div>';
+        nowPlaying.innerHTML = "<b>" + les.title + "</b><span>Coming soon</span>";
+        return;
+      }
+      player.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + les.youtubeId +
+        '?rel=0&modestbranding=1" title="' + les.title.replace(/"/g, "&quot;") +
+        '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      nowPlaying.innerHTML = "<b>" + les.title + "</b><span>Module " + (mi + 1) + " · Lesson " + (li + 1) + "</span>";
+      if (playingBtn) playingBtn.classList.remove("playing");
+      btn.classList.add("playing");
+      playingBtn = btn;
+    }
+
+    function renderSyllabus() {
+      syllabus.innerHTML = "";
+      data.courses[activeCourse].modules.forEach((mod, mi) => {
+        const d = document.createElement("details");
+        d.className = "syl-module";
+        if (mi === 0) d.open = true;
+        const withVideo = mod.lessons.filter(l => l.youtubeId).length;
+        d.innerHTML = "<summary>Module " + (mi + 1) + " — " + mod.title +
+          "<small>" + withVideo + "/" + mod.lessons.length + " live</small></summary>";
+        mod.lessons.forEach((les, li) => {
+          const b = document.createElement("button");
+          b.className = "syl-lesson";
+          const icon = les.youtubeId ? "▶" : "🔒";
+          b.innerHTML = '<span class="ic">' + icon + '</span><span class="tt">' + les.title +
+            '</span><span class="badge ' + les.tier + '">' + les.tier + "</span>";
+          b.onclick = () => play(les, b, mi, li);
+          d.appendChild(b);
+        });
+        syllabus.appendChild(d);
+      });
+    }
+
+    renderTabs();
+    renderSyllabus();
+  })();
+  </script>
+</body>
+</html>

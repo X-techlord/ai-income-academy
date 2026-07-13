@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course Admin — AI Income Academy</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>" />
+  <style>
+    .admin-wrap { max-width: 1000px; margin: 0 auto; padding: 130px 24px 80px; }
+    .admin-banner {
+      border: 1px solid #ffb02e; border-radius: 14px; padding: 16px 20px;
+      background: rgba(255, 176, 46, 0.08); color: #ffcf7d; font-size: 0.9rem; margin-bottom: 40px;
+    }
+    .guide-steps { counter-reset: step; display: flex; flex-direction: column; gap: 0; margin-top: 30px; }
+    .gstep { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 26px 0; border-top: 1px solid var(--line); }
+    .gstep::before {
+      counter-increment: step; content: "0" counter(step);
+      font-family: var(--font-display); font-size: 2rem; color: var(--accent); line-height: 1;
+    }
+    .gstep h3 { font-size: 1.08rem; margin-bottom: 8px; }
+    .gstep p, .gstep li { color: var(--muted); font-size: 0.95rem; }
+    .gstep ul { margin: 10px 0 0 18px; display: flex; flex-direction: column; gap: 6px; }
+    .gstep code {
+      background: var(--ink-3); border: 1px solid var(--line); border-radius: 6px;
+      padding: 2px 8px; font-size: 0.85em; color: var(--accent);
+    }
+    .warn { color: #ffcf7d; }
+
+    .editor { margin-top: 60px; }
+    .course-tabs { display: flex; gap: 10px; margin: 26px 0; flex-wrap: wrap; }
+    .course-tabs button {
+      background: var(--ink-2); border: 1px solid var(--line); color: var(--muted);
+      border-radius: 999px; padding: 10px 20px; cursor: pointer; font-family: var(--font-body);
+      font-size: 0.9rem; transition: all 0.2s;
+    }
+    .course-tabs button.on { background: var(--accent); color: var(--ink); border-color: var(--accent); font-weight: 700; }
+    .ed-module { border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); margin-bottom: 14px; overflow: hidden; }
+    .ed-module > h4 {
+      padding: 16px 20px; font-family: var(--font-display); text-transform: uppercase;
+      font-weight: 400; font-size: 1.05rem; border-bottom: 1px solid var(--line);
+    }
+    .ed-lesson {
+      display: grid; grid-template-columns: 1fr 190px 110px 44px; gap: 10px; align-items: center;
+      padding: 12px 20px; border-top: 1px solid var(--line); font-size: 0.9rem;
+    }
+    .ed-lesson:first-of-type { border-top: none; }
+    .ed-lesson .lt { color: var(--muted); }
+    .ed-lesson input, .ed-lesson select {
+      background: var(--ink-3); border: 1px solid var(--line); color: var(--bone);
+      border-radius: 8px; padding: 9px 12px; font-family: var(--font-body); font-size: 0.85rem; width: 100%;
+    }
+    .ed-lesson input:focus, .ed-lesson select:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+    .ed-lesson input.ok { border-color: #2fe38e; }
+    .ed-lesson .pv {
+      width: 44px; height: 34px; border-radius: 6px; border: 1px solid var(--line);
+      display: grid; place-items: center; color: var(--muted); cursor: pointer; background: var(--ink-3);
+    }
+    .ed-lesson .pv:hover { color: var(--accent); border-color: var(--accent); }
+    .toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin: 26px 0; position: sticky; bottom: 16px; z-index: 5; }
+    .toolbar .btn { font-size: 0.88rem; padding: 12px 22px; }
+    #statusMsg { color: var(--accent); font-size: 0.85rem; align-self: center; }
+    #previewModal {
+      position: fixed; inset: 0; background: rgba(6,8,7,0.9); z-index: 200;
+      display: none; place-items: center; padding: 24px;
+    }
+    #previewModal.open { display: grid; }
+    #previewModal .box { width: min(860px, 100%); aspect-ratio: 16/9; background: #000; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+    #previewModal iframe { width: 100%; height: 100%; border: 0; }
+    #previewModal .close { position: absolute; top: 22px; right: 28px; font-size: 2rem; color: var(--bone); cursor: pointer; background: none; border: none; }
+    @media (max-width: 760px) { .ed-lesson { grid-template-columns: 1fr; } .gstep { grid-template-columns: 44px 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="/">AI<b>INCOME</b>ACADEMY</a>
+    <div class="nav-links">
+      <a href="/sensei">The Sensei</a>
+      <a href="/classroom">Classroom</a>
+      <a href="/admin" class="active">Admin</a>
+    </div>
+  </nav>
+
+  <div class="admin-wrap">
+    <span class="kicker">Instructor tools · Not linked publicly</span>
+    <h1 class="display h-1">Course Admin</h1>
+
+    <div class="admin-banner" style="margin-top:26px">
+      ⚠️ This dashboard runs entirely in your browser — nothing here is password-protected, so keep this URL to yourself
+      and never paste secret links into lesson titles. Real member-only protection comes from your payment flow
+      (Selar delivers the classroom link + your gating solution). See step 7 of the guide.
+    </div>
+
+    <!-- ================= GUIDE ================= -->
+    <section>
+      <h2 class="display h-2">How to publish your course</h2>
+      <p class="lead" style="margin-top:12px">From finished recordings to lessons playing on this site — the full workflow:</p>
+
+      <div class="guide-steps">
+        <div class="gstep">
+          <div>
+            <h3>Record &amp; edit your lessons</h3>
+            <p>One video per lesson (the curriculum below mirrors your landing pages). Keep filenames matching the lesson titles so you don't mix them up — e.g. <code>M1-S1 Introduction.mp4</code>.</p>
+          </div>
+        </div>
+        <div class="gstep">
+          <div>
+            <h3>Upload each video to YouTube as <span class="warn">Unlisted</span></h3>
+            <ul>
+              <li>YouTube Studio → Create → Upload videos.</li>
+              <li>Visibility: <b>Unlisted</b> — anyone with the link can watch, but the video never appears in search, your channel page, or recommendations.</li>
+              <li class="warn">⚠️ Do NOT use "Private" — private videos can only be watched by Google accounts you invite one-by-one, so they will show an error when embedded on this site. "Unlisted" is the correct setting for embedded course lessons.</li>
+              <li>Under "License and distribution" leave <b>Allow embedding</b> ON (it's what lets the video play inside your classroom page).</li>
+              <li>Optional hardening: disable comments, hide like counts, and add a watermark with your brand.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gstep">
+          <div>
+            <h3>Copy each video's ID</h3>
+            <p>From a URL like <code>https://youtu.be/dQw4w9WgXcQ</code> or <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code>, the ID is <code>dQw4w9WgXcQ</code> — the 11 characters after <code>v=</code> or the last path segment. You can also paste the full URL below; the dashboard extracts the ID automatically.</p>
+          </div>
+        </div>
+        <div class="gstep">
+          <div>
+            <h3>Paste the IDs into the editor below</h3>
+            <p>Pick the course tab, paste each lesson's video URL/ID, set its tier (Free preview / Standard / Premium), and hit the ▶ button to preview the embed right here. Your work saves to this browser automatically as you type.</p>
+          </div>
+        </div>
+        <div class="gstep">
+          <div>
+            <h3>Export the content file</h3>
+            <p>Click <b>Download course-content.json</b>. Replace the file at <code>data/course-content.json</code> in the site folder with the downloaded one.</p>
+          </div>
+        </div>
+        <div class="gstep">
+          <div>
+            <h3>Redeploy</h3>
+            <ul>
+              <li>Commit and push: <code>git add data/course-content.json && git commit -m "update lessons" && git push</code></li>
+              <li>Deploy: <code>vercel deploy --prod</code> (or connect the GitHub repo in your Vercel dashboard once, and every push auto-deploys).</li>
+              <li>The <a href="/classroom" style="color:var(--accent)">/classroom</a> page reads this file and renders every lesson with its player.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gstep">
+          <div>
+            <h3>Gate access for paying students</h3>
+            <p>A static site can't do real logins. The simple launch flow: keep <code>/classroom</code> unlisted (don't link it publicly), and have Selar's post-payment redirect / thank-you email deliver the classroom link plus an access code. When you outgrow that, upgrade to a real gate:</p>
+            <ul>
+              <li><b>Easiest:</b> host lessons on Selar's own course delivery and keep this site as the marketing front.</li>
+              <li><b>More control:</b> add Memberstack / Outseta to this site (paste-in script, handles login + paywall).</li>
+              <li><b>Full control:</b> move the classroom to Supabase/Firebase auth — a later project I can build when you're ready.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDITOR ================= -->
+    <section class="editor">
+      <h2 class="display h-2">Lesson editor</h2>
+      <p class="lead" style="margin-top:12px">Paste a YouTube URL or ID per lesson. Green border = valid ID captured. Autosaves to this browser.</p>
+
+      <div class="course-tabs" id="courseTabs"></div>
+      <div id="editorBody"></div>
+
+      <div class="toolbar">
+        <button class="btn btn-primary" id="btnDownload">⬇ Download course-content.json</button>
+        <button class="btn btn-ghost" id="btnCopy">Copy JSON</button>
+        <button class="btn btn-ghost" id="btnReset">Reset to published file</button>
+        <span id="statusMsg"></span>
+      </div>
+    </section>
+  </div>
+
+  <div id="previewModal">
+    <button class="close" aria-label="Close preview">×</button>
+    <div class="box"><iframe id="previewFrame" title="Lesson preview" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+  </div>
+
+  <script>
+  (async function () {
+    const LS_KEY = "aia-course-content-draft";
+    let data;
+
+    // load: draft from localStorage, else published file
+    const published = await fetch("/data/course-content.json").then(r => r.json());
+    try { data = JSON.parse(localStorage.getItem(LS_KEY)) || published; }
+    catch { data = published; }
+
+    const tabs = document.getElementById("courseTabs");
+    const body = document.getElementById("editorBody");
+    const statusMsg = document.getElementById("statusMsg");
+    let activeCourse = Object.keys(data.courses)[0];
+
+    function extractId(input) {
+      input = input.trim();
+      if (!input) return "";
+      const m = input.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([\w-]{11})/) || input.match(/^([\w-]{11})$/);
+      return m ? m[1] : "";
+    }
+
+    function save() {
+      localStorage.setItem(LS_KEY, JSON.stringify(data));
+      statusMsg.textContent = "Draft saved " + new Date().toLocaleTimeString();
+    }
+
+    function renderTabs() {
+      tabs.innerHTML = "";
+      Object.entries(data.courses).forEach(([key, c]) => {
+        const b = document.createElement("button");
+        b.textContent = c.title;
+        b.classList.toggle("on", key === activeCourse);
+        b.onclick = () => { activeCourse = key; renderTabs(); renderEditor(); };
+        tabs.appendChild(b);
+      });
+    }
+
+    function renderEditor() {
+      body.innerHTML = "";
+      data.courses[activeCourse].modules.forEach((mod, mi) => {
+        const box = document.createElement("div");
+        box.className = "ed-module";
+        box.innerHTML = "<h4>Module " + (mi + 1) + " — " + mod.title + "</h4>";
+        mod.lessons.forEach((les) => {
+          const row = document.createElement("div");
+          row.className = "ed-lesson";
+
+          const title = document.createElement("span");
+          title.className = "lt";
+          title.textContent = les.title;
+
+          const input = document.createElement("input");
+          input.placeholder = "YouTube URL or ID";
+          input.value = les.youtubeId || "";
+          if (les.youtubeId) input.classList.add("ok");
+          input.oninput = () => {
+            const id = extractId(input.value);
+            les.youtubeId = id;
+            input.classList.toggle("ok", !!id);
+            save();
+          };
+
+          const tier = document.createElement("select");
+          ["free", "standard", "premium"].forEach((t) => {
+            const o = document.createElement("option");
+            o.value = t; o.textContent = t[0].toUpperCase() + t.slice(1);
+            if (les.tier === t) o.selected = true;
+            tier.appendChild(o);
+          });
+          tier.onchange = () => { les.tier = tier.value; save(); };
+
+          const pv = document.createElement("button");
+          pv.className = "pv"; pv.textContent = "▶"; pv.title = "Preview embed";
+          pv.onclick = () => {
+            if (!les.youtubeId) { alert("No video ID yet for this lesson."); return; }
+            document.getElementById("previewFrame").src =
+              "https://www.youtube-nocookie.com/embed/" + les.youtubeId + "?rel=0";
+            document.getElementById("previewModal").classList.add("open");
+          };
+
+          row.append(title, input, tier, pv);
+          box.appendChild(row);
+        });
+        body.appendChild(box);
+      });
+    }
+
+    document.querySelector("#previewModal .close").onclick = () => {
+      document.getElementById("previewModal").classList.remove("open");
+      document.getElementById("previewFrame").src = "";
+    };
+
+    document.getElementById("btnDownload").onclick = () => {
+      data.updated = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "course-content.json";
+      a.click();
+      statusMsg.textContent = "Downloaded — replace data/course-content.json and redeploy.";
+    };
+
+    document.getElementById("btnCopy").onclick = async () => {
+      data.updated = new Date().toISOString().slice(0, 10);
+      await navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+      statusMsg.textContent = "JSON copied to clipboard.";
+    };
+
+    document.getElementById("btnReset").onclick = () => {
+      if (!confirm("Discard your local draft and reload the published file?")) return;
+      localStorage.removeItem(LS_KEY);
+      location.reload();
+    };
+
+    renderTabs();
+    renderEditor();
+  })();
+  </script>
+</body>
+</html>
